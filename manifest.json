@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "Flomo Quick Clip",
+  "version": "1.2",
+  "description": "一键将选中的网页内容发送到 flomo，支持右键菜单和划词悬浮浮标",
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "notifications"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["content.css"]
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Flomo设置"
+  },
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  }
+}

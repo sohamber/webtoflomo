@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      width: 320px; /* 默认宽度，适合 Popup */
+      padding: 16px;
+      margin: 0; /* Popup 模式下无需 margin */
+      background-color: #fff;
+    }
+
+    /* 当作为全屏标签页打开时，让界面居中并美化 */
+    @media (min-width: 400px) {
+      body {
+        margin: 60px auto; /* 垂直居中 */
+        border: 1px solid #eee;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        padding: 30px;
+      }
+    }
+    
+    header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+    }
+    
+    header img {
+      width: 24px;
+      height: 24px;
+      margin-right: 10px;
+    }
+    
+    h1 {
+      font-size: 16px;
+      font-weight: 600;
+      color: #333;
+      margin: 0;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+      position: relative; /* 为密码切换按钮定位 */
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: #555;
+      margin-bottom: 6px;
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    /* 密码框样式 */
+    input[type="password"], input[type="text"], select {
+      width: 100%;
+      padding: 8px 36px 8px 10px; /* 右侧留出空间给眼睛图标 */
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      box-sizing: border-box;
+      font-size: 13px;
+      transition: border-color 0.2s;
+      background: #fafafa;
+    }
+
+    input:focus, select:focus {
+      border-color: #52d68a;
+      background: #fff;
+      outline: none;
+    }
+
+    /* 小眼睛图标按钮 */
+    .toggle-visibility {
+      position: absolute;
+      right: 10px;
+      cursor: pointer;
+      opacity: 0.4;
+      transition: opacity 0.2s;
+      background: none;
+      border: none;
+      padding: 0;
+      display: flex;
+      align-items: center;
+    }
+
+    .toggle-visibility:hover {
+      opacity: 0.8;
+    }
+
+    .hint {
+      font-size: 11px;
+      color: #999;
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
+    button#save {
+      background-color: #52d68a;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      width: 100%;
+      margin-top: 10px;
+      transition: background 0.2s;
+    }
+
+    button#save:hover {
+      background-color: #41b875;
+    }
+
+    #status {
+      margin-top: 10px;
+      text-align: center;
+      font-size: 12px;
+      height: 18px;
+      line-height: 18px;
+    }
+    
+    footer {
+      margin-top: 15px;
+      text-align: center;
+      font-size: 11px;
+      color: #bbb;
+    }
+    
+    footer a {
+      color: #52d68a;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="icon.png" alt="Logo">
+    <h1>Flomo Quick Clip</h1>
+  </header>
+
+  <div class="form-group">
+    <label for="apiUrl">API 链接</label>
+    <div class="input-wrapper">
+      <!-- 默认为 password 类型 -->
+      <input type="password" id="apiUrl" placeholder="https://flomoapp.com/iwh/..." />
+      <!-- 眼睛图标 -->
+      <button class="toggle-visibility" id="toggleBtn" title="显示/隐藏">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+          <circle cx="12" cy="12" r="3"></circle>
+        </svg>
+      </button>
+    </div>
+    <div class="hint">链接已加密显示。flomo 设置 > API 及插件中获取</div>
+  </div>
+
+  <div class="form-group">
+    <label for="position">悬浮浮标位置</label>
+    <select id="position">
+      <option value="right">正右侧 (推荐)</option>
+      <option value="top-right">右上角</option>
+      <option value="top">正上方</option>
+      <option value="bottom">正下方</option>
+      <option value="bottom-right">右下角</option>
+    </select>
+  </div>
+
+  <button id="save">保存配置</button>
+  <div id="status"></div>
+
+  <footer>
+    <a href="https://flomoapp.com" target="_blank">flomoapp.com</a>
+  </footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>
